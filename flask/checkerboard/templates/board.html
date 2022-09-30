@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- MY CSS -->
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>CHECKERBOARD</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>CHECKERBOARD</h1>
+        </div>
+        <div class="main">
+
+            {# FOR LOOP TO GENERATE NUM OF ROWS #}
+            {% for x in range( rows ): %} 
+                <div class="row">
+                {# 2ND FOR LOOP TO GENERATE TILES PER ROW #}
+                {% for y in range( cols ): %}
+                    {# USING THIS TO ALTERNATE COLOR INDEX #}
+                    {# y mod 2 alternates tile colors #}
+                    {# x mod 2 makes the next row start at a new color #}
+                    {# have to mod the whole expression for closure#}
+                    {% set color_index = ((y % 2) + (x % 2)) % 2 %}
+                    <div class="tile" style="background-color: {{tile_colors[color_index]}}"></div>
+                {% endfor %}
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</body>
+</html>

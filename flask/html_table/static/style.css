@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.container{
+    margin: 0 auto;
+}
+.leaders{
+    text-align: center;
+    margin: 100px 0px 0px;
+    background-color: dodgerblue;
+    color: white;
+    padding: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 10px 10px 10px black;
+}
+.table{
+    box-shadow: 10px 10px 10px black;
+}
