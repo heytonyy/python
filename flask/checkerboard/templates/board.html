@@ -15,9 +15,9 @@
             <h1>CHECKERBOARD</h1>
         </div>
         <div class="main">
-
             {# FOR LOOP TO GENERATE NUM OF ROWS #}
             {% for x in range( rows ): %} 
+            {{ row_index }}
                 <div class="row">
                 {# 2ND FOR LOOP TO GENERATE TILES PER ROW #}
                 {% for y in range( cols ): %}
