@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HALFMOON CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+    <title>Ninja Money</title>
+</head>
+<body class="bg-very-dark">
+    <div class="container-fluid">
+        <!-- BUILDING FORMS -->
+        <div class="row">
+            <!-- FARM -->
+            <div class="col">
+                <div class="mw-full">
+                    <div class="card p-0 bg-dark-light">
+                        <div class="text-center pt-20">
+                            <img src="{{url_for('static', filename='/imgs/farm.png')}}" class="img-fluid rounded-top" alt="farm">
+                        </div>
+                        <div class="content text-secondary">
+                            <h2 class="content-title">Farm</h2>
+                            <p class="text-secondary">(earns 10-20 gold)</p>
+                            <div class="text-center">
+                                <!-- FORM -->
+                                <form action="/process_money" method="post">
+                                    <input type="hidden" name="building" value="farm" />
+                                    <input type="submit" class="btn btn-primary" value="Find Gold!"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CAVE -->
+            <div class="col">
+                <div class="mw-full">
+                    <div class="card p-0 bg-dark-light">
+                        <div class="text-center pt-20">
+                            <img src="{{url_for('static', filename='/imgs/cave.png')}}" class="img-fluid rounded-top" alt="cave">
+                        </div>
+                        <div class="content text-secondary">
+                            <h2 class="content-title">Cave</h2>
+                            <p class="text-secondary">(earns 5-10 gold)</p>
+                            <div class="text-center">
+                                <!-- FORM -->
+                                <form action="/process_money" method="post">
+                                    <input type="hidden" name="building" value="cave" />
+                                    <input type="submit" class="btn btn-primary" value="Find Gold!"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- HOUSE -->
+            <div class="col">
+                <div class="mw-full">
+                    <div class="card p-0 bg-dark-light">
+                        <div class="text-center pt-20">
+                            <img src="{{url_for('static', filename='/imgs/house.png')}}" class="img-fluid rounded-top" alt="house">
+                        </div>
+                        <div class="content text-secondary">
+                            <h2 class="content-title">House</h2>
+                            <p class="text-secondary">(earns 2-5 gold)</p>
+                            <div class="text-center">
+                                <!-- FORM -->
+                                <form action="/process_money" method="post">
+                                    <input type="hidden" name="building" value="house" />
+                                    <input type="submit" class="btn btn-primary" value="Find Gold!"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CASINO -->
+            <div class="col">
+                <div class="mw-full">
+                    <div class="card p-0 bg-dark-light">
+                        <div class="text-center pt-20">
+                            <img src="{{url_for('static', filename='/imgs/casino.png')}}" class="img-fluid rounded-top" alt="casino">
+                        </div>
+                        <div class="content text-secondary">
+                            <h2 class="content-title">Casino</h2>
+                            <p class="text-secondary">(earns/takes 0-50 gold)</p>
+                            <div class="text-center">
+                                <!-- FORM -->
+                                <form action="/process_money" method="post">
+                                    <input type="hidden" name="building" value="casino" />
+                                    <input type="submit" class="btn btn-primary" value="Find Gold!"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- GOLD & ACTIVITY LOG -->
+        <div class="row">
+            <!-- GOLD CARD -->
+            <div class="col-3 mt-0">
+                <div class="mw-full">
+                    <div class="card p-0 bg-dark-light h-300">
+                        <div class="text-center pt-20">
+                        {% if session['play_status'] == 'lose': %}
+                            <img src="{{url_for('static', filename='/imgs/broke.png')}}" class="img-fluid rounded-top" alt="no money">
+                        {% elif session['play_status'] == 'playing': %}
+                            <img src="{{url_for('static', filename='/imgs/gold.png')}}" class="img-fluid rounded-top" alt="gold">
+                        {% elif session['play_status'] == 'win': %}
+                            <img src="{{url_for('static', filename='/imgs/gem.png')}}" class="img-fluid rounded-top" alt="gem">
+                        {% endif %}
+                        </div>
+                        <div class="content text-secondary">
+                            <div class="row">
+                                <div class="col">
+                                    <h2 class="content-title">Gold:</h2>
+                                    <p class="text-secondary">
+                                        {{ session['gold'] }}
+                                    </p>
+                                </div>
+                                <div class="col">
+                                    <h2 class="content-title">Turns:</h2>
+                                    <p class="text-secondary">
+                                        {{ session['turns'] }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ACTIVITY LOG CARD -->
+            <div class="col-9">
+                <div class="mw-full">
+                    <div class="card p-0 bg-dark-light">
+                        <div class="content">
+                            <h2 class="content-title text-secondary">Activity Log:</h2>
+                            <div class="overflow-y-hidden overflow-y-md-auto h-200">
+                                <div class="h-200">
+                                <!-- LOG TEXT HERE -->
+                                {% for msg in session['log']|reverse: %}
+                                    <p class="text-{{msg['status']}}">
+                                        {{ msg['message'] }}
+                                    </p>
+                                {% endfor%}
+                                {% if session['play_status'] == 'lose': %}
+                                    <!-- FORM -->
+                                    <form action="/reset" method="post">
+                                        <input type="hidden" name="reset" value="reset" />
+                                        <input type="submit" class="btn btn-danger" value="Play again"/>
+                                    </form>
+                                {% endif %}
+                                {% if session['play_status'] == 'win': %}
+                                    <!-- FORM -->
+                                    <form action="/reset" method="post">
+                                        <input type="hidden" name="reset" value="reset" />
+                                        <input type="submit" class="btn btn-success" value="Play again"/>
+                                    </form>
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+SELECT * FROM users;
+SELECT * FROM favorite;
+SELECT * FROM books;
+
+INSERT INTO users (first_name, last_name) VALUES ('Jane','Amsden'), ('Emily','Dixon'), ('Theodore','Dostoevsky'), ('William','Shapiro'), ('Lao','Xiu')
+
+INSERT INTO books (title, num_of_pages) VALUES ('C Sharp', 500), ('Java', 300), ('Python', 600), ('PHP', 100), ('Ruby', 500)
+
+UPDATE books SET books.title = 'C#' WHERE id=1;
+
+UPDATE users SET users.first_name = 'Bill' WHERE id=4;
+
+INSERT INTO favorites (book_id, user_id) VALUES (1, 1), (2, 1);
+
+INSERT INTO favorites (book_id, user_id) VALUES (1, 2), (2, 2), (3, 2);
+
+INSERT INTO favorites (book_id, user_id) VALUES (1, 3), (2, 3), (3, 3), (4, 3);
+
+INSERT INTO favorites (book_id, user_id) VALUES (1, 4), (2, 4), (3, 4), (4, 4), (5, 4);
+
+DELETE FROM favorites WHERE id = 10;
+
+INSERT INTO favorites (book_id, user_id) VALUES (2, 5);
+
+SELECT * FROM favorites WHERE user_id = 3;
+
+SELECT * FROM favorites WHERE book_id = 5;

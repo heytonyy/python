@@ -1,0 +1,20 @@
+SELECT * FROM name_schema.users;
+
+INSERT INTO name_schema.users (first_name, last_name, email)
+VALUES 
+	('Tony','Aiello','tony@email.com'),
+	('Trevor','Corson','trevor@email.com'),
+    	('Sol','the cat','sol@email.com'),
+    	('Luna','the cat','luna@email.com');
+
+SELECT first_name, last_name, email FROM name_schema.users WHERE email = "tony@email.com";
+
+SELECT MAX(id) FROM name_schema.users;
+
+UPDATE name_schema.users SET last_name = 'Pancakes' WHERE id=1;
+
+DELETE FROM name_schema.users WHERE id=2;
+
+SELECT * FROM name_schema.users ORDER BY first_name ASC;
+
+SELECT * FROM name_schema.users ORDER BY first_name DESC;

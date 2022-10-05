@@ -1,0 +1,21 @@
+SELECT * FROM dojos;
+
+INSERT INTO dojos (name) VALUES ('Dallas'), ('DC'), ('Tulsa');
+
+DELETE FROM dojos WHERE id > 0;
+
+INSERT INTO dojos (name) VALUES ('Burbank'), ('San Jose'), ('Seattle');
+
+INSERT INTO ninjas (first_name, last_name, age, dojos_id) VALUES ('Tony','Aiello', 31, 4), ('Sol','the cat', 4, 4), ('Luna','the cat', 4, 4);
+
+INSERT INTO ninjas (first_name, last_name, age, dojos_id)
+VALUES ('Trevor','Corson', 31, 5), ('Darwin','the cat', 4, 5), ('Sam','the dog', 4, 5);
+
+INSERT INTO ninjas (first_name, last_name, age, dojos_id)
+VALUES ('Morgan','Mrogan', 31, 6), ('Milo','the dog', 4, 6), ('Otis','the cat', 4, 6);
+
+SELECT * FROM ninjas WHERE dojos_id = 4;
+
+SELECT * FROM ninjas WHERE dojos_id = 6;
+
+SELECT * FROM ninjas WHERE id = 9;
