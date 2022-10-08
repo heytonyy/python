@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HALFMOON CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+    <title>USER CR</title>
+</head>
+<body class="bg-very-dark">
+    <div class="container">
+        <div class="col">
+            <div class="row mt-3">
+                <div class="card bg-dark mx-auto text-light">
+                    <a href="/users">Back to Home</a>
+                    <h1 class="text-center">User {{ user['id'] }} </h1>
+                    <p class="mb-20">Full Name: {{ user['first_name'] }} {{ user['last_name'] }}</p>
+                    <p class="mb-20">Email: {{ user['email'] }}</p>
+                    <p class="mb-20">Created On: {{ user['created_at'] }}</p>
+                    <p class="mb-20">Last Updated On: {{ user['updated_at'] }}</p>
+                    <div class="row justify-content-start">
+                        <div class="col-2"><a href="/users/{{user['id']}}/edit">Edit</a></div>
+                        <div class="col-1">|</div>
+                        <div class="col-1"><a href="/user/{{user['id']}}/delete">Delete</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

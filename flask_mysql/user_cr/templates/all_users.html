@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HALFMOON CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+    <title>All Users</title>
+</head>
+<body>
+    <body class="bg-very-dark">
+        <div class="container">
+            <div class="col">
+                <div class="row mt-3">
+                    <div class="card bg-dark mx-auto text-light">
+                        <h1 class="text-center">All Users</h1>
+                        
+                        <table class="table mb-20">
+                            <tr>
+                                <th>ID</th>
+                                <th>FULL NAME</th>
+                                <th>EMAIL</th>
+                                <th>CREATED AT</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                            {% for user in users %}
+                                <tr>
+                                    <td> {{user['id']}} </td>
+                                    <td> {{user['first_name']}} {{user['last_name']}}  </td>
+                                    <td> {{user['email']}} </td>
+                                    <td> {{user['created_at']}} </td>
+                                    <td>
+                                        <a href="/users/{{user['id']}}">SHOW</a> - 
+                                        <a href="/users/{{user['id']}}/edit">EDIT</a> - 
+                                        <a href="/user/{{user['id']}}/delete">DELETE</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                        <a href="/users/new">ADD NEW USER</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</body>
+</html>

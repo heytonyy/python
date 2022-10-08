@@ -1,0 +1,5 @@
+This is the error I get... I pipenv installed pymysql and flask, I'm able to load the index.html, but I can't see any data from my DB. I pip3 list checked too and it shows both flask and pymysql in my project modules.
+
+(module) cursors
+Import "pymysql.cursors" could not be resolved from sourcePylancereportMissingModuleSource
+No quick fixes available

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HALFMOON CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+    <title>Authors</title>
+</head>
+<body>
+    <<body class="bg-very-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col mx-auto w-500">
+                    <div class="card text-light bg-dark-light">
+                        <h1>New Author</h1>
+                        <form action="/new_dojo" method="POST">
+                            <!-- NEW AUTHOR FORM -->
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control mb-20" name="name" id="name">
+                                <input class="btn btn-primary" type="submit" value="Create">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col mx-auto w-400">
+                    <div class="card text-light bg-dark-light">
+                        <h1>All Authors</h1>
+                        {# ADD CODE HERE TO DISPLAY ALL AUTHORS #}
+                        <!-- {% for dojo in dojos %}
+                            <div class="row mb-20 align-items-center">
+                                <a href="/dojos/{{dojo['id']}}" class="mr-20">{{dojo.name}}</a>
+                                <form action="/delete_dojo" method="POST">
+                                    <input type="hidden" id="id" name="id" value="{{dojo['id']}}">
+                                    <input class="btn btn-primary" type="submit" value="DELETE">
+                                </form>
+                            </div>
+                        {% endfor %} -->
+                        <a href="/authors">Add Author</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</body>
+</html>

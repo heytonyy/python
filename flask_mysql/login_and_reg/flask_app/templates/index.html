@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HALFMOON CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/flask_app/static/style.css">
+    <title>Log In</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="card bg-dark-light text-light">
+                    <h1 class="text-primary">Registar</h1>
+                    <form action="/make_account" method="POST">
+                        <!-- REG ACCOUNT FORM -->
+                        <div class="form-group">
+                            <label for="first_name" class="required">First Name:</label>
+                            <input type="text" class="form-control" name="first_name" id="first_name" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name" class="required">Last Name:</label>
+                            <input type="text" class="form-control" name="last_name" id="last_name" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="required">Email:</label>
+                            <input type="text" class="form-control" name="email" id="email" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="required">Password:</label>
+                            <input type="password" class="form-control" name="password" id="password" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="password_confirm" class="required">Confirm Password:</label>
+                            <input type="password" class="form-control" name="password_confirm_confirm" id="password_confirm" required="required">
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card bg-dark-light text-light">
+                    <h1 class="text-success">Log In</h1>
+                    <form action="/login" method="POST">
+                        <div class="form-group">
+                            <label for="email" class="required">Email:</label>
+                            <input type="text" class="form-control" name="email" id="email" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="required">Password:</label>
+                            <input type="password" class="form-control" name="password" id="password" required="required">
+                        </div>
+                        <input class="btn btn-success" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
