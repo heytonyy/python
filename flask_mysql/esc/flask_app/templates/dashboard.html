@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HALFMOON CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+    <title>Home</title>
+</head>
+<body style="background-image: url({{url_for('static', filename='bg-1.jpg')}}); background-size: cover;">
+    <div class="page-wrapper with-navbar">
+        <!-- Navbar start -->
+        <nav class="navbar">
+            <div class="d-flex justify-content-between w-full">
+                <div class="content d-flex align-items-center">
+                    <button class="btn btn-square mr-10" type="button" onclick="halfmoon.toggleDarkMode()">
+                        <i>☾</i>
+                    </button>
+                    <p class="hidden-dm">Light Mode On</p>
+                    <p class="hidden-lm">Dark Mode On</p>
+                </div>
+                <div class="content d-flex align-items-center">
+                    <p>ESC</p>
+                </div>
+                <div class="content d-flex align-items-center">
+                    <p class="mr-10">Welcome, {{user_info['name']}}</p>
+                    <a href="/" class="btn btn-primary">Logout</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-title">
+                            {{user_info['messages']|length}} New Message(s)
+                        </div>
+                        <hr>
+                        {# START LOOP - ALL MSG #}
+                        {% for msg in user_info['messages']: %}
+                            <div class="mt-10">
+                                {{msg['from_user_id']}} said
+                                <span class="text-danger">
+                                    {% set deltatime = (current_time - msg['created_at']).total_seconds() %}
+                                    {% if deltatime < 60: %}
+                                        ({{ (deltatime)|round|int }} seconds ago)
+                                    {% elif deltatime < 3600: %}
+                                        ({{ (deltatime/60)|round|int }} minutes ago)
+                                    {% elif deltatime < 86400: %}
+                                        ({{ (deltatime/3600)|round|int }} hours ago)
+                                    {% elif deltatime < 31536000: %}
+                                        ({{ (deltatime/86400)|round|int }} days ago)
+                                    {% else: %}
+                                        ({{ (deltatime/31536000)|round|int }} years ago)
+                                    {% endif %}
+                                </span>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p>{{msg['content']}}</p>
+                                    <form action="/delete_msg" method="POST">
+                                        <input type="hidden" name="id" value="{{msg['id']}}">
+                                        <input type="submit" class="btn btn-danger" value="Delete">
+                                    </form>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {# END OF LOOP #}
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-title">
+                            Send a message
+                        </div>
+                        <hr>
+                        <p class="text-success">You have send {{user_info['msg_sent']}} messages so far</p>
+                        {# START LOOP - ALL CHATS #}
+                        {% for friend in user_info['friends']: %}
+                            <form action="/send_message/{{friend['id']}}" method="POST">
+                                <div class="form-group">
+                                    <label for="message">Send Message to {{friend['first_name']}}</label>
+                                    <textarea class="form-control w-full" name="content" id="message" placeholder="Write your message here"></textarea>
+                                    <input type="submit" class="btn btn-primary mt-10" value="Send">
+                                </div>
+                            </form>
+                        {% endfor %}
+                        {# END OF LOOP #}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Halfmoon JS -->
+    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+</body>
+</html>

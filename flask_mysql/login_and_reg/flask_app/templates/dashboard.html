@@ -8,13 +8,29 @@
     <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
     <title>Home</title>
 </head>
-<body class="bg-dark">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col mx-auto">
-                <h1 class="text-light">Welcome (PUT NAME HERE)</h1>
+<body style="background-image: url({{url_for('static', filename='bg-3.gif')}}); background-size: cover;">
+    <div class="page-wrapper with-navbar">
+        <!-- This parent container is required -->
+        <div class="sticky-alerts"></div>
+
+        <!-- Navbar start -->
+        <nav class="navbar justify-content-end">
+            <div class="content d-flex align-items-center">
+                <p class="hidden-dm">Light Mode On</p>
+                <p class="hidden-lm">Dark Mode On</p>
+                <button class="btn btn-square ml-10" type="button" onclick="halfmoon.toggleDarkMode()">
+                    <i>☾</i>
+                </button>
             </div>
+        </nav>
+
+        <div class="content-wrapper">
+            <h1>Welcome, {{username}}</h1>
         </div>
     </div>
+    
+    <!-- Halfmoon JS -->
+    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+    <script src="{{url_for('static', filename='toast_script.js')}}"></script>
 </body>
 </html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HALFMOON CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+    <title>Friendship</title>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <h3>Friendship</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Friend</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if friendships[0]['id']: %}
+                                {% for friendship in friendships: %}
+                                    <tr>
+                                        <td>{{friendship['first_name']}} {{friendship['last_name']}}</td>
+                                        <td>{{friendship['ffirst_name']}} {{friendship['flast_name']}}</td>
+                                    </tr>
+                                {% endfor%}
+                            {% endif%}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <h3>Add User</h3>
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <label for="first_name" class="required">First Name</label>
+                            <input type="text" class="form-control" name="first_name" id="first_name" required="required">
+                            <label for="last_name" class="required">Last Name</label>
+                            <input type="text" class="form-control" name="last_name" d="full-name" required="required">
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Submit">
+                    </form>
+                    <hr class="mt-20 mb-20">
+                    <h3>Create Friendship</h3>
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <label for="user_id" class="required">User</label>
+                            <select class="form-control" name="user_id" id="user_id">
+                                <option value="">Name1</option>
+                            </select>
+                            <label for="friend_id" class="required">Friend</label>
+                            <select class="form-control" name="user_id" id="user_id">
+                                <option value="">Name1</option>
+                            </select>
+                          </div>
+                        <input class="btn btn-primary" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HALFMOON CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet">
+    <title>Log In</title>
+</head>
+<body style="background-image: url({{url_for('static', filename='bg-1.jpg')}}); background-size: cover;">
+    <div class="page-wrapper with-navbar">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="d-flex justify-content-between w-full">
+                <div class="content d-flex align-items-center">
+                    <button class="btn btn-square mr-10" type="button" onclick="halfmoon.toggleDarkMode()">
+                        <i>☾</i>
+                    </button>
+                    <p class="hidden-dm">Light Mode On</p>
+                    <p class="hidden-lm">Dark Mode On</p>
+                </div>
+                <div class="content  d-flex alight-items-center">
+                    <p>ESC</p>
+                </div>
+                <div class="content d-flex alight-items-center">
+                    <p>Welcome</p>
+                </div>
+            </div>
+        </nav>
+
+        <!-- PAGE CONTENT -->
+        <div class="content-wrapper">
+
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <h1 class="text-primary">Registar</h1>
+                        <form action="/make_user" method="POST" id="reg-form">
+                            <!-- REG ACCOUNT FORM -->
+                            <div class="form-group">
+                                <label for="first_name" class="required">First Name:</label>
+                                <input type="text" class="form-control" name="first_name" id="first_name" required="required">
+                                {% with messages = get_flashed_messages(with_categories=true) %}
+                                    {% if messages %}
+                                        {% for category, message in messages %}
+                                            {% if category == 'first_name'%}
+                                                <p class="text-danger mt-0">{{ message }}</p>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div class="form-group">
+                                <label for="last_name" class="required">Last Name:</label>
+                                <input type="text" class="form-control" name="last_name" id="last_name" required="required">
+                                {% with messages = get_flashed_messages(with_categories=true) %}
+                                    {% if messages %}
+                                        {% for category, message in messages %}
+                                            {% if category == 'last_name'%}
+                                                <p class="text-danger mt-0">{{ message }}</p>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="required">Email:</label>
+                                <input type="text" class="form-control" name="email" id="email" required="required">
+                                {% with messages = get_flashed_messages(with_categories=true) %}
+                                    {% if messages %}
+                                        {% for category, message in messages %}
+                                            {% if category == 'email'%}
+                                                <p class="text-danger mt-0">{{ message }}</p>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endwith %}
+                                {% with messages = get_flashed_messages(with_categories=true) %}
+                                    {% if messages %}
+                                        {% for category, message in messages %}
+                                            {% if category == 'email_taken'%}
+                                                <p class="text-danger mt-0">{{ message }}</p>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div class="form-group">
+                                <label for="reg_password" class="required">Password:</label>
+                                <input type="password" class="form-control" name="password" id="reg_password" required="required">
+                                {% with messages = get_flashed_messages(with_categories=true) %}
+                                    {% if messages %}
+                                        {% for category, message in messages %}
+                                            {% if category == 'password'%}
+                                                <p class="text-danger mt-0">{{ message }}</p>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div class="form-group">
+                                <label for="reg_password_confirm" class="required">Confirm Password:</label>
+                                <input type="password" class="form-control" name="password_confirm" id="reg_password_confirm" required="required">
+                                {% with messages = get_flashed_messages(with_categories=true) %}
+                                    {% if messages %}
+                                        {% for category, message in messages %}
+                                            {% if category == 'password_match'%}
+                                                <p class="text-danger mt-0">{{ message }}</p>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                        </form>
+                        <button type="submit" class="btn btn-primary" form="reg-form" value="Submit">Submit</button>
+                    </div>
+                <!-- END OF REG COL -->
+                </div>
+
+                <div class="col">
+                    <div class="card">
+                        <h1 class="text-success">Log In</h1>
+                        <form action="/login" method="POST">
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                                {% if messages %}
+                                    {% for category, message in messages %}
+                                        {% if category == 'invalid'%}
+                                            <p class="text-danger mt-0">{{ message }}</p>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                            <div class="form-group">
+                                <label for="login-email" class="required">Email:</label>
+                                <input type="text" class="form-control" name="email" id="login-email" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password" class="required">Password:</label>
+                                <input type="password" class="form-control" name="password" id="login-password" required="required">
+                            </div>
+                            <input class="btn btn-success" type="submit" value="Submit">
+                        </form>
+                    </div>
+                <!-- END OF LOGIN COL -->
+                </div>
+                
+            <!-- END OF ROW -->
+            </div>
+        <!-- END OF CONTENT-WRAPPER -->
+        </div>
+    </div>
+    <!-- Halfmoon JS -->
+    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+</body>
+</html>
