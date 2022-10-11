@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HALFMOON CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+    <title>All Jokes</title>
+</head>
+<body>
+    <div class="page-wrapper with-navbar">
+        <!-- Navbar -->
+        <nav class="navbar justify-content-end">
+            <div class="content d-flex align-items-center">
+                <a href="/logout" class="btn btn-danger mr-20">LOGOUT</a>
+                <p class="hidden-dm">Light Mode On</p>
+                <p class="hidden-lm">Dark Mode On</p>
+                <button class="btn btn-square ml-10" type="button" onclick="halfmoon.toggleDarkMode()">
+                    <i>☾</i>
+                </button>
+            </div>
+        </nav>
+        <!-- PAGE CONTENT -->
+        <div class="content-wrapper">
+            <div class="content d-flex align-items-center justify-content-between">
+                <h1>DAD JOKES</h1>
+                <a href="/jokes" class="btn btn-primary">BACK TO ALL JOKES</a>
+            </div>
+            <div class="content">
+                <p>Details</p>
+                <div class="card">
+                    <div class="d-flex mb-10">
+                        <div class="col-4">
+                            SETUP
+                        </div>
+                        <div class="col-8">
+                            {{joke_info['setup']}}
+                        </div>
+                    </div>
+                    <div class="d-flex mb-20">
+                        <div class="col-4">
+                            PUNCHLINE
+                        </div>
+                        <div class="col-8">
+                            {{joke_info['punchline']}}
+                        </div>
+                    </div>
+                    <div class="d-flex mb-20">
+                        <div class="col-4">
+                            Uploaded By
+                        </div>
+                        <div class="col-8">
+                            {{joke_author['first_name']}}
+                        </div>
+                    </div>
+                    <div class="d-flex mb-20">
+                        <div class="col-4">
+                            Date Created
+                        </div>
+                        <div class="col-8">
+                            {{joke_info['created_at']}}
+                        </div>
+                    </div>
+                    <div class="d-flex mb-20">
+                        <div class="col-4">
+                            GROANS
+                        </div>
+                        <div class="col-8">
+                            {{num_of_groans}}
+                        </div>
+                    </div>
+                    {% if joke_info['account_id'] == session['user_id']: %}
+                    <div class="d-flex align-items-center justify-content-end">
+                        <a href="/jokes/edit/{{joke_info['id']}}" class="btn btn-primary mr-10">EDIT</a>
+                        <a href="/jokes/delete/{{joke_info['id']}}" class="btn btn-danger">DELETE</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HALFMOON CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+    <title>All Jokes</title>
+</head>
+<body>
+    <div class="page-wrapper with-navbar">
+        <!-- Navbar -->
+        <nav class="navbar justify-content-end">
+            <div class="content d-flex align-items-center">
+                <a href="/logout" class="btn btn-danger mr-20">LOGOUT</a>
+                <p class="hidden-dm">Light Mode On</p>
+                <p class="hidden-lm">Dark Mode On</p>
+                <button class="btn btn-square ml-10" type="button" onclick="halfmoon.toggleDarkMode()">
+                    <i>☾</i>
+                </button>
+            </div>
+        </nav>
+        <!-- PAGE CONTENT -->
+        <div class="content-wrapper">
+            <div class="content d-flex align-items-center justify-content-between">
+                <h1>DAD JOKES</h1>
+                <a href="/jokes" class="btn btn-primary">BACK TO ALL JOKES</a>
+            </div>
+            <div class="content">
+                <p>Add a Dad Joke</p>
+            </div>
+
+            <div class="card">
+                <form action="/jokes/edit/{{joke_info['id']}}" method="POST">
+                    <div class="form-group">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    {% if category == 'setup'%}
+                                        <p class="text-danger mt-0">{{ message }}</p>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        <label for="setup">Set Up</label>
+                        <textarea class="form-control" id="setup" name="setup">{{joke_info['setup']}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    {% if category == 'punchline'%}
+                                        <p class="text-danger mt-0">{{ message }}</p>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        <label for="punchline">Punchline</label>
+                        <textarea class="form-control" id="punchline" name="punchline">{{joke_info['punchline']}}</textarea>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="UPDATE JOKE">
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- HALFMOON JS -->
+    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+</body>
+</html>

@@ -14,13 +14,16 @@ class SList:
             runner = runner.next
         return self
     def add_to_back(self, val):
+        if self.head == None:	# if the list is empty
+            self.add_to_front(val)	# run the add_to_front method
+            return self
         new_node = SLNode(val)
         runner = self.head
-        while (runner != None):
+        while (runner.next != None):
             runner = runner.next # on to the next one... on to the next one
         runner.next = new_node
+        return self
         
-
 class SLNode:
     def __init__(self, val):
         self.value = val

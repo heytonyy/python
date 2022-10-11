@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HALFMOON CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+    <title>All Jokes</title>
+</head>
+<body>
+    <div class="page-wrapper with-navbar">
+        <!-- Navbar -->
+        <nav class="navbar justify-content-end">
+            <div class="content d-flex align-items-center">
+                <a href="/logout" class="btn btn-danger mr-20">LOGOUT</a>
+                <div class="d-flex align-items-center">
+                    <p class="hidden-dm">Light Mode On</p>
+                    <p class="hidden-lm">Dark Mode On</p>
+                    <button class="btn btn-square ml-10" type="button" onclick="halfmoon.toggleDarkMode()">
+                        <i>☾</i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- PAGE CONTENT -->
+        <div class="content-wrapper">
+            <div class="content d-flex align-items-center justify-content-between">
+                <h1>DAD JOKES</h1>
+                <a href="/jokes/add" class="btn btn-primary">Add a Dad Joke</a>
+            </div>
+            <div class="content">
+                <p>Welcome, {{user['first_name']}}! Here are all the dad jokes.</p>
+            </div>
+            {# LOOP THROUGH THIS WITH ALL JOKES #}
+            {% for joke in all_jokes: %}
+            <div class="card">
+                <div class="d-flex mb-10">
+                    <div class="col-4">
+                        SETUP
+                    </div>
+                    <div class="col-8">
+                        {{joke['setup']}}
+                    </div>
+                </div>
+                <div class="d-flex mb-20">
+                    <div class="col-4">
+                        PUNCHLINE
+                    </div>
+                    <div class="col-8">
+                        {{joke['punchline']}}
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-end">
+                    <a href="/jokes/view/{{joke['id']}}" class="btn btn-primary mr-10">VIEW</a>
+                    <a href="/jokes/groans/{{joke['id']}}" class="btn btn-danger">GROAN</a>
+                </div>
+            </div>
+            {% endfor %}
+            {# END LOOP HERE #}
+        </div>
+    </div>
+    
+    <!-- HALFMOON JS -->
+    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+</body>
+</html>
