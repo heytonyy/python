@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HALFMOON CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+    <title>Recipes Share</title>
+</head>
+<body>
+    <div class="page-wrapper with-navbar">
+
+        <!-- Navbar -->
+        <<nav class="navbar justify-content-between">
+            <div class="content d-flex align-items-center">
+                <p class="hidden-dm">Light Mode On</p>
+                <p class="hidden-lm">Dark Mode On</p>
+                <button class="btn btn-square ml-10" type="button" onclick="halfmoon.toggleDarkMode()">
+                    <i>☾</i>
+                </button>
+            </div>
+            <div class="content d-flex align-items-center">
+                <p class="mr-20">Welcome, {{user['first_name']}}</p>
+                <a href="/logout" class="btn btn-primary">Logout</a>
+            </div>
+        </nav>
+
+        <!-- PAGE CONTENT -->
+        <div class="content-wrapper">
+            <div class="d-flex align-items-center justify-content-around pt-20">
+                <div class="content-title">Add a New Recipes:</div>
+                <a href="/recipes" class="btn btn-primary">Back to All Recipes</a>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        {% if action == 'new' %}
+                        <!-- START OF NEW RECIPE FORM -->
+                        <form id="newrecipe" action="/recipes/new/{{session['user_id']}}" method="POST">
+                            <div class="form-group">
+                                <label for="name" class="required">Recipe Name:</label>
+                                <input type="text" class="form-control" name="name" id="first_name" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label for="description" class="required">Description:</label>
+                                <textarea class="form-control" name="description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="instructions" class="required">Instructions:</label>
+                                <textarea class="form-control" name="instructions"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="date_made" class="required">Date Made:</label>
+                                <input type="date" class="ml-20" id="start" name="date_made" value="2022-10-10">
+                            </div>
+                            <div class="form-group">
+                                <label for="under_30" class="required">Under 30mins?</label>
+                                    <div class="custom-radio">
+                                        <input type="radio" name="under_30" id="yes_under_30" value="1" required="required">
+                                        <label for="yes_under_30">Yes</label>
+                                    </div>
+                                    <div class="custom-radio">
+                                        <input type="radio" name="under_30" id="no_under_30" value="0" required="required">
+                                        <label for="no_under_30">No</label>
+                                    </div>
+                                <button type="submit" form="newrecipe" class="btn btn-primary mt-20">Create</button>
+                            </div>
+                        </form>
+                        {% else: %}
+                        <!-- EDIT RECIPE FORM -->
+                        <form id="editrecipe" action="/recipes/edit/{{recipe_info['id']}}" method="POST">
+                            <div class="form-group">
+                                <label for="name" class="required">Recipe Name:</label>
+                                <input type="text" class="form-control" name="name" id="name" value="{{recipe_info['name']}}" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label for="description" class="required">Description:</label>
+                                <textarea class="form-control" name="description">{{recipe_info['description']}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="instructions" class="required">Instructions:</label>
+                                <textarea class="form-control" name="instructions">{{recipe_info['instructions']}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="date_made" class="required">Date Made:</label>
+                                <input type="date" class="ml-20" id="start" name="date_made" value="{{recipe_info['date_made']}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="under_30" class="required">Under 30mins?</label>
+                                    {% if recipe_info['under_30'] == 1: %}
+                                    <div class="custom-radio">
+                                        <input type="radio" name="under_30" id="yes_under_30" checked value="1" required="required">
+                                        <label for="yes_under_30">Yes</label>
+                                    </div>
+                                    <div class="custom-radio">
+                                        <input type="radio" name="under_30" id="no_under_30" value="0" required="required">
+                                        <label for="no_under_30">No</label>
+                                    </div>
+                                    {% else: %}
+                                    <div class="custom-radio">
+                                        <input type="radio" name="under_30" id="yes_under_30" value="1" required="required">
+                                        <label for="yes_under_30">Yes</label>
+                                    </div>
+                                    <div class="custom-radio">
+                                        <input type="radio" name="under_30" id="no_under_30" checked value="0" required="required">
+                                        <label for="no_under_30">No</label>
+                                    </div>
+                                    {% endif %}
+                                <button type="submit" form="editrecipe" class="btn btn-primary mt-20">Edit</button>
+                            </div>
+                        </form>
+                        {% endif %}
+                        <!-- END OF FORM -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- HALFMOON JS -->
+    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+</body>
+</html>

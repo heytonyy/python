@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HALFMOON CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+    <title>Recipes Share</title>
+</head>
+<body>
+    <div class="page-wrapper with-navbar">
+
+        <!-- Navbar -->
+        <<nav class="navbar justify-content-between">
+            <div class="content d-flex align-items-center">
+                <p class="hidden-dm">Light Mode On</p>
+                <p class="hidden-lm">Dark Mode On</p>
+                <button class="btn btn-square ml-10" type="button" onclick="halfmoon.toggleDarkMode()">
+                    <i>☾</i>
+                </button>
+            </div>
+            <div class="content d-flex align-items-center">
+                <p class="mr-20">Welcome, {{user['first_name']}}</p>
+                <a href="/logout" class="btn btn-primary">Logout</a>
+            </div>
+        </nav>
+
+        <!-- PAGE CONTENT -->
+        <div class="content-wrapper">
+            <div class="d-flex align-items-center justify-content-around pt-20">
+                <div class="content-title">All Recipes:</div>
+                <a href="/recipes/new" class="btn btn-primary"> + Create</a>
+            </div>
+            <div class="content d-flex justify-content-between align-items-center">
+                <table class="table 600 mx-auto">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Under 30 mins?</th>
+                            <th>Posted By</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {# LOOP THROUGH RECIPES IN DB #}
+                        {% for recipe in all_recipes: %}
+                            <tr>
+                                <td>{{recipe['name']}}</td>
+                                <td>
+                                    {% if recipe['under_30'] == 1: %}
+                                        Yes
+                                    {% else: %}
+                                        No
+                                    {% endif %}
+                                </td>
+                                <td>{{recipe['first_name']}}</td>
+                                <td>
+                                    <a href="/recipes/view/{{recipe['id']}}" class="btn btn-success">VIEW</a>
+                                    {% if recipe['account_id'] == user['id']: %}
+                                        <a href="/recipes/edit/{{recipe['id']}}/{{user['id']}}" class="btn btn-primary">EDIT</a>
+                                        <a href="/recipes/delete/{{recipe['id']}}" class="btn btn-danger">DELETE</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <!-- HALFMOON JS -->
+    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+</body>
+</html>

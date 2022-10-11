@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HALFMOON CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+    <title>Recipes Share</title>
+</head>
+<body>
+    <div class="page-wrapper with-navbar">
+
+        <!-- Navbar -->
+        <<nav class="navbar justify-content-between">
+            <div class="content d-flex align-items-center">
+                <p class="hidden-dm">Light Mode On</p>
+                <p class="hidden-lm">Dark Mode On</p>
+                <button class="btn btn-square ml-10" type="button" onclick="halfmoon.toggleDarkMode()">
+                    <i>☾</i>
+                </button>
+            </div>
+            <div class="content d-flex align-items-center">
+                <p class="mr-20">Welcome, {{user['first_name']}}</p>
+                <a href="/logout" class="btn btn-primary">Logout</a>
+            </div>
+        </nav>
+
+        <div class="content-wrapper">
+            <div class="d-flex align-items-center justify-content-around pt-20">
+                <div class="content-title">{{recipe_info['name']}}</div>
+                <div class="content-title">Posted by {{recipe_info['account_id']}}</div>
+                <a href="/recipes" class="btn btn-primary">Back to All Recipes</a>
+            </div>
+            <div class="row">
+                <div class="card w-full">
+                    <div class="content d-flex">
+                        <div class="col-4">
+                            Description
+                        </div>
+                        <div class="col-6">
+                            {{recipe_info['description']}}
+                        </div>
+                    </div>
+                    <div class="content d-flex">
+                        <div class="col-4">
+                            Under 30?
+                        </div>
+                        <div class="col-6">
+                            {% if recipe_info['under_30'] == 1: %}
+                                Yes
+                            {% else: %}
+                                No
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="content d-flex">
+                        <div class="col-4">
+                            Instructions
+                        </div>
+                        <div class="col-6">
+                            {{recipe_info['instructions']}}
+                        </div>
+                    </div>
+                    <div class="content d-flex">
+                        <div class="col-4">
+                            Date Made
+                        </div>
+                        <div class="col-6">
+                            {{recipe_info['date_made']}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- HALFMOON JS -->
+    <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+</body>
+</html>
