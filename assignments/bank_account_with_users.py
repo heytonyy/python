@@ -4,7 +4,9 @@ class BankAccount:
         self.account_name = account_name
         self.balance = balance
         self.int_rate = int_rate
-
+    def new(self):
+        return self
+        
     def deposit(self, amount):
         self.balance += amount
         return self
